@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %} {% set pageName="Summary Empty" %} {% block
+content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">Your 2025 catch return</h1>
+    <div>
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Rivers fished",
+          attributes: { id: "river" },
+          head: [
+              { text: "River"},
+              { text: "Days fished (1 Jan to 16 Jun)", format: "numeric"},
+              { text: "Days fished (17 Jun to 31 Dec)", format: "numeric" },
+              { text: "Change", format: "numeric" },
+              { text: "Delete", format: "numeric" }
+          ],
+          rows: []
+      }) }}
+
+      <p class="govuk-body summary-link-right" style="text-align: right;">
+        <a id="activities-add" class="govuk-link" href="add-river">Add a river</a>
+      </p>
+
+      {{ govukButton({
+        name: "continue",
+        text: "Review catch return",
+        classes: "govuk-!-margin-right-1",
+        disabled: true
+      }) }}
+
+      <div>
+        <a id="cancel" class="govuk-link govuk-body-m" href="select-year.html"
+          >Cancel</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

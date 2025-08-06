@@ -1,0 +1,108 @@
+{% extends "layouts/main.html" %} 
+{% set pageName="Confirm your 2025 catch return report" %} 
+
+{% set riverRows = [
+  [
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River" } },
+    { text: "11", format: "numeric", attributes: { 'data-label': "Days fished (1 Jan to 16 Jun)"} },
+    { text: "1", format: "numeric", attributes: { 'data-label': "Days fished (17 Jun to 31 Dec)"} },
+    { text: "4", format: "numeric", attributes: { 'data-label': "Fish Caught"} }
+  ]
+]  
+%}
+
+{% set smallCatchRows = [
+  [
+    { text: "January", attributes: { 'data-label': "Month" } },
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River"} },
+    { text: 2, format: "numeric", attributes: { 'data-label': "Fly"} },
+    { text: 1, format: "numeric", attributes: { 'data-label': "Spinner"} },
+    { text: 0, format: "numeric", attributes: { 'data-label': "Bait"} },
+    { text: 1, format: "numeric", attributes: { 'data-label': "Released"} }
+  ]
+]  
+%}
+
+{% set largeCatchRows = [
+  [
+    { text: "01/01", attributes: { 'data-label': "Date"} },
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River" } },
+    { text: "Salmon", attributes: { 'data-label': "Type"} },
+    { text: "1kg", attributes: { 'data-label': "Weight"} },
+    { text: "Fly", attributes: { 'data-label': "Method"} },
+    { text: "Yes", attributes: { 'data-label': "Released"} }
+  ]
+]  
+%}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div>
+      <h1 class="govuk-heading-l">Confirm your 2025 catch return report</h1>
+
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table govuk-!-margin-bottom-9",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Rivers fished",
+          attributes: { id: "river" },
+          head: [
+              { text: "River"},
+              { text: "Days fished (1 Jan to 16 Jun)", format: "numeric"},
+              { text: "Days fished (17 Jun to 31 Dec)", format: "numeric" },
+              { text: "Fish caught", format: "numeric" }
+          ],
+          rows: riverRows
+      }) }}
+
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table govuk-!-margin-bottom-9",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Small adult sea trout (1lb and under)",
+          attributes: { id: "small-catch" },
+          head: [
+              { text: "Month"},
+              { text: "River"},
+              { text: "Fly", format: "numeric"},
+              { text: "Spinner", format: "numeric" },
+              { text: "Bait", format: "numeric" },
+              { text: "Released", format: "numeric" }
+          ],
+          rows: smallCatchRows
+      }) }}
+
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table govuk-!-margin-bottom-9",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Salmon and large adult sea trout",
+          attributes: { id: "large-catch" },
+          head: [
+              { text: "Date"},
+              { text: "River"},
+              { text: "Type"},
+              { text: "Weight"},
+              { text: "Method"},
+              { text: "Released"}
+          ],
+          rows: largeCatchRows
+      }) }}
+
+      {{ govukWarningText({
+        text: "Only submit if you have finished fishing for salmon and sea trout this year.",
+        iconFallbackText: "Warning"
+      }) }}
+      
+      {{ govukButton({
+          name: "continue",
+          href: "confirmation",
+          text: "Submit catch return" })
+      }}
+    </div>
+    <a class="govuk-body" href="summary-complete">Cancel</a>
+  </div>
+</div>
+
+{% endblock %}

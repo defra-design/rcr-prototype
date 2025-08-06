@@ -1,0 +1,134 @@
+
+{% extends "layouts/main.html" %} 
+
+{% set pageName="Summary" %} 
+
+{% set riverRows = [
+  [
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River" } },
+    { text: "11", format: "numeric", attributes: { 'data-label': "Days fished (1 Jan to 16 Jun)"} },
+    { text: "1", format: "numeric", attributes: { 'data-label': "Days fished (17 Jun to 31 Dec)"} },
+    { html: '<a href="add-river">Change</a>', format: "numeric", attributes: { 'data-label': "Change"} },
+    { html: '<a href="delete-river">Delete</a>', format: "numeric", attributes: { 'data-label': "Delete" } }
+  ]
+]  
+%}
+
+{% set smallCatchRows = [
+  [
+    { text: "January", attributes: { 'data-label': "Month" } },
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River"} },
+    { text: 2, format: "numeric", attributes: { 'data-label': "Fly"} },
+    { text: 1, format: "numeric", attributes: { 'data-label': "Spinner"} },
+    { text: 0, format: "numeric", attributes: { 'data-label': "Bait"} },
+    { text: 1, format: "numeric", attributes: { 'data-label': "Released"} },
+    { html: '<a href="add-small-catch">Change</a>', format: "numeric", attributes: { 'data-label': "Change"} },
+    { html: '<a href="delete-small-catch">Delete</a>', format: "numeric", attributes: { 'data-label': "Delete" } }
+  ]
+]  
+%}
+
+{% set largeCatchRows = [
+  [
+    { text: "01/01", attributes: { 'data-label': "Date"} },
+    { text: "Derwent (Cumbria)", attributes: { 'data-label': "River" } },
+    { text: "Salmon", attributes: { 'data-label': "Type"} },
+    { text: "1kg", attributes: { 'data-label': "Weight"} },
+    { text: "Fly", attributes: { 'data-label': "Method"} },
+    { text: "Yes", attributes: { 'data-label': "Released"} },
+    { html: '<a href="add-large-catch">Change</a>', format: "numeric", attributes: { 'data-label': "Change"} },
+    { html: '<a href="delete-large-catch">Delete</a>', format: "numeric", attributes: { 'data-label': "Delete" } }
+  ]
+]  
+%}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">Your 2025 catch return</h1>
+    <div>
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Rivers fished",
+          attributes: { id: "river" },
+          head: [
+              { text: "River"},
+              { text: "Days fished (1 Jan to 16 Jun)", format: "numeric"},
+              { text: "Days fished (17 Jun to 31 Dec)", format: "numeric" },
+              { text: "Change", format: "numeric" },
+              { text: "Delete", format: "numeric" }
+          ],
+          rows: riverRows
+      }) }}
+
+      <p class="govuk-body summary-link-right" style="text-align: right;">
+        <a id="activities-add" class="govuk-link" href="add-river">Add another river</a>
+      </p>
+
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Small adult sea trout (1lb and under)",
+          attributes: { id: "small-catch" },
+          head: [
+              { text: "Month"},
+              { text: "River"},
+              { text: "Fly", format: "numeric"},
+              { text: "Spinner", format: "numeric" },
+              { text: "Bait", format: "numeric" },
+              { text: "Released", format: "numeric" },
+              { text: "Change", format: "numeric" },
+              { text: "Delete", format: "numeric" }
+          ],
+          rows: smallCatchRows
+      }) }}
+
+      <p class="govuk-body summary-link-right" style="text-align: right;">
+        <a id="small-catch-add" class="govuk-link" href="add-small-catch">Add a small adult sea trout catch</a>
+      </p>
+
+      {{ govukTable({
+          classes: "rcr-responsive-summary-table",
+          captionClasses: "govuk-heading-m",
+          firstCellIsHeader: true,
+          caption: "Salmon and large adult sea trout",
+          attributes: { id: "large-catch" },
+          head: [
+              { text: "Date"},
+              { text: "River"},
+              { text: "Type"},
+              { text: "Weight"},
+              { text: "Method"},
+              { text: "Released"},
+              { text: "Change", format: "numeric" },
+              { text: "Delete", format: "numeric" }
+          ],
+          rows: largeCatchRows
+      }) }}
+
+      <p class="govuk-body summary-link-right" style="text-align: right;">
+        <a id="small-catch-add" class="govuk-link" href="add-large-catch">Add a salmon or large adult sea trout</a>
+      </p>
+
+      <p class="govuk-body-m govuk-!-margin-top-7">If you plan to fish again for salmon or sea trout this year, select 'Save and return later', otherwise select 'Review catch return'.</p>
+      
+      {{ govukButton({
+        name: "continue",
+        href: "review"
+        text: "Review catch return",
+        classes: "govuk-!-margin-right-1"
+      }) }}
+
+      <div>
+        <a id="save" class="govuk-link govuk-body-m" href="save"
+          >Save and return later</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

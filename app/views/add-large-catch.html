@@ -1,0 +1,222 @@
+
+{% extends "layouts/main.html" %}
+
+{% set pageName="Add large catch" %}
+
+{% set leg = '<span class="govuk-heading-l">Add a salmon or large adult sea trout</span>' %}
+
+{% set rivers = [
+  "",
+  "Derwent",
+  "Aber"
+] %}
+
+{% set items = [] %}
+{% for river in rivers %}
+    {{ items.push({
+        text: river,
+        value: river
+    }) }}
+{% endfor %}
+
+
+
+{% block content %}
+	{% set imperialWeight %}
+    <div class="govuk-date-input__item govuk-!-margin-bottom-5">
+      {{ govukInput({
+        id: "pounds",
+        name: "pounds",
+        attributes: { maxlength: 3 },
+        classes: "govuk-input--width-3",
+        label: {
+            text: "Pounds"
+        }
+      }) }}
+    </div>
+
+    <div class="govuk-date-input__item govuk-!-margin-bottom-5">
+      {{ govukInput({
+        id: "ounces",
+        name: "ounces",
+        attributes: { maxlength: 2 },
+        classes: "govuk-input--width-2",
+        label: {
+            text: "Ounces"
+        }
+      }) }}
+    </div>
+	{% endset -%}
+
+	{% set metricWeight %}
+    {{ govukInput({
+      id: "kilograms",
+      name: "kilograms",
+      classes: "govuk-input--width-5",
+      attributes: { maxlength: 5 },
+      label: {
+          text: "Kilograms"
+      }
+    }) }}
+	{% endset -%}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukFieldset({
+        legend: { html: leg },
+         classes: "govuk-heading-l",
+        isPageHeading: true
+      }) }}
+      <form >
+        {{ govukSelect({
+          id: "river",
+          name: "river",
+          label: {
+              text: "River"
+          },
+          fieldset: {
+              legend: {
+                  text: "River",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+              }
+          },
+          items: items
+        }) }}
+
+        {{ govukFieldset({
+          legend: {
+            html: '<span class="govuk-label govuk-!-font-weight-bold">Date caught</span><span id="date-hint" class="govuk-hint">For example, 24 6</span>'
+          }
+        }) }}
+
+				<div class="govuk-form-group">
+					<div class="govuk-date-input__item">
+        		{{ govukInput({
+          		id: "day",
+          		name: "day",
+          		label: {
+          		    text: "Day",
+          		    classes: "govuk-date-input__label"
+          		},
+          		type: "text",
+          		attributes: { maxlength: 2 },
+          		classes:  "govuk-input--width-2"
+        		}) }}
+					</div>
+		
+					<div class="govuk-date-input__item">
+        		{{ govukInput({
+          		id: "month",
+          		name: "month",
+          		label: {
+          		    text: "Month",
+          		    classes: "govuk-date-input__label"
+          		},
+          		type: "text",
+          		classes: "govuk-input--width-2"
+        		}) }}
+					</div>
+				</div>
+
+				{{ govukRadios({
+          idPrefix: "type",
+          name: "type",
+          fieldset: {
+              legend: {
+                  text: "Type of fish",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+              }
+          },
+          classes: "govuk-radios--inline",
+          items: [
+						{ text: "Salmon", value: "Salmon" },
+						{ text: "Sea Trout", value: "Sea Trout" }
+					]
+        }) }}
+				
+        {{ govukRadios({
+          idPrefix: "system",
+          name: "system",
+          fieldset: {
+            legend: {
+                text: "Weight of fish",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+            }
+          },
+          items: [
+            {
+                text: "In pounds and ounces",
+                value: "IMPERIAL",
+                conditional: { html: imperialWeight }
+            },
+            {
+                text: "In kilograms",
+                value: "METRIC",
+                conditional: { html: metricWeight }
+            }
+          ]
+        }) }}
+				
+				{{ govukRadios({
+          idPrefix: "method",
+          name: "method",
+          fieldset: {
+            legend: {
+              text: "Method",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+            }
+          },
+          classes: "govuk-radios--inline",
+          items: [
+            { text: "Fly", value: "Fly" },
+						{ text: "Spinner", value: "Spinner" },
+            { text: "Bait", value: "Bait" }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          idPrefix: "released",
+          name: "released",
+          fieldset: {
+              legend: {
+                  text: "Released",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+              }
+          },
+          items:[
+              {
+                  text: "Yes",
+                  value: true
+              },
+              {
+                  text: "No",
+                  value: false
+              }
+          ],
+          classes: "govuk-radios--inline govuk-!-margin-bottom-6"
+        }) }}
+
+        {{ govukButton({
+          name: "continue",
+          text: "Save",
+          href: "summary-complete",
+          classes: "govuk-!-margin-right-1"
+        }) }}
+      
+        {{ govukButton({
+          name: "add",
+          text: "Save and add another",
+          href: "add-large-catch",
+          classes: "govuk-button--secondary"
+        }) }}
+      </form>
+      <a class="govuk-body" href="summary-complete">Cancel</a>
+    </div>
+</div>
+
+{% endblock %}
