@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %} 
+{% set pageName="Select Year" %} 
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="select-salmon-2025">
+      {{ govukFieldset({
+        legend: {
+          html: '<span class="govuk-heading-l">Which season does your catch return cover?</span>',
+          isPageHeading: true
+        }
+      }) }}
+
+      {{ govukRadios({
+        idPrefix: "select-year",
+        name: "select-year", 
+        items: [
+          {
+            value: "2024",
+            text: "2024"
+          },
+          {
+            value: "2025",
+            text: "2025"
+          }
+        ]
+      }) }}
+      
+      {{ govukButton({
+          name: "continue",
+          text: "Continue" })
+      }}
+    </form>
+  </div>
+</div>
+
+{% endblock %}

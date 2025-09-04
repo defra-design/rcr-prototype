@@ -1,0 +1,344 @@
+
+{% extends "layouts/main.html" %}
+
+{% set pageName="Add river" %}
+
+{% set rivers = [
+  "Aber",
+  "Adur",
+  "Aeron",
+  "Afan",
+  "Aled",
+  "Allen (Tyne)",
+  "Aln",
+  "Alwen",
+  "Alyn / Alun",
+  "Amman",
+  "Annas",
+  "Arth",
+  "Artro",
+  "Arun",
+  "Avon (Devon)",
+  "Avon (Hants)",
+  "Axe",
+  "Banwy",
+  "Barle",
+  "Beaulieu",
+  "Bela",
+  "Black Beck",
+  "Bollin",
+  "Borrow Beck",
+  "Bovey",
+  "Brathay",
+  "Bray",
+  "Brit",
+  "Brock",
+  "Browney",
+  "Bure",
+  "Calder (Cumbria)",
+  "Calder (Lancashire)",
+  "Calder (Yorkshire)",
+  "Caldew",
+  "Camel",
+  "Caseg",
+  "Cefni",
+  "Cegin Menai Strait",
+  "Ceiriog",
+  "Ceirw",
+  "Cennen",
+  "Ceri",
+  "Char",
+  "Cleddau (Eastern)",
+  "Cleddau (Western)",
+  "Cleifon",
+  "Clettwr",
+  "Clwyd",
+  "Clywedog",
+  "Cocker",
+  "Colwyn",
+  "Coly",
+  "Conder",
+  "Conwy",
+  "Coquet",
+  "Cothi",
+  "Cover",
+  "Crake",
+  "Cresswell",
+  "Cych",
+  "Cynin",
+  "Cywyn / Cowin",
+  "Darent",
+  "Dart",
+  "Dee",
+  "Derwent (Cumbria)",
+  "Derwent (Tyne)",
+  "Derwent (Yorkshire)",
+  "Dewi Fawr",
+  "Duad",
+  "Duddon",
+  "Dulas (Colwyn Bay)",
+  "Dulas (North)",
+  "Dulas (South)",
+  "Dwyfach",
+  "Dwyfawr",
+  "Dwyryd",
+  "Dyfi / Dovey",
+  "Dysynni",
+  "Eamont",
+  "Ebbw",
+  "Eden (Cumbria)",
+  "Eden (Wales)",
+  "Ehen",
+  "Ellen",
+  "Elwy",
+  "Ely",
+  "Erch",
+  "Erme",
+  "Esk (Border)",
+  "Esk (Cumbria)",
+  "Esk (Yorkshire)",
+  "Etherow",
+  "Ewenny",
+  "Exe",
+  "Allen (South West)",
+  "Fal",
+  "Fowey",
+  "Frome",
+  "Gannel",
+  "Garw",
+  "Gelt",
+  "Glaslyn",
+  "Grannell",
+  "Greta (Keswick)",
+  "Greta (Lancaster)",
+  "Greta (Tees Bcastle)",
+  "Gwaun",
+  "Gwendraeth (Fach)",
+  "Gwendraeth (Fawr)",
+  "Gwili",
+  "Gwyrfai",
+  "Hamble",
+  "Hayle",
+  "Hindburn",
+  "Hodder",
+  "Hull",
+  "Inny",
+  "Irfon",
+  "Irt",
+  "Irthing",
+  "Itchen",
+  "Ithon",
+  "Keer",
+  "Kenfig",
+  "Kent",
+  "Leri",
+  "Leven",
+  "Lickle",
+  "Liddle",
+  "Lledr",
+  "Lleiniog",
+  "Llifon",
+  "Lliw Swansea",
+  "Llugwy",
+  "Llyfni",
+  "Looe",
+  "Loughor",
+  "Lud",
+  "Lugg",
+  "Lune",
+  "Lyd",
+  "Lymington",
+  "Lyn",
+  "Lyne",
+  "Lynher",
+  "Marron",
+  "Mawddach",
+  "Meavy",
+  "Medway",
+  "Meon",
+  "Mersey",
+  "Mint",
+  "Mole",
+  "Morlais",
+  "Nadder",
+  "Nar",
+  "Neath",
+  "Nene",
+  "Nevern",
+  "Ogmore",
+  "Ogwen",
+  "Okement",
+  "Orwell",
+  "Otter",
+  "Ottery",
+  "Ouse (Sussex)",
+  "Ouse (Yorkshire)",
+  "Parkmill Stream Gower",
+  "Parrett",
+  "Piddle",
+  "Plym",
+  "Rede",
+  "Rheidol",
+  "Rhyd-hir",
+  "Rhymney",
+  "Ribble",
+  "Rothay",
+  "Rother (Eastern)",
+  "Rother (Petworth)",
+  "Rusland Pool",
+  "Sawdde",
+  "Scalby Beck",
+  "Seaton",
+  "Seiont",
+  "Severn",
+  "Soch",
+  "Solva",
+  "Sprint",
+  "St Austell",
+  "Stock Ghyll",
+  "Stour (Kent)",
+  "Swale",
+  "Syfynwy",
+  "Taf",
+  "Taff",
+  "Tamar",
+  "Tanat",
+  "Tavy",
+  "Taw",
+  "Tawe",
+  "Tees",
+  "Teifi",
+  "Teign",
+  "Teme",
+  "Test",
+  "Thames",
+  "Thaw",
+  "Tiddy",
+  "Tone",
+  "Torridge",
+  "Trent",
+  "Tresilian",
+  "Trout Beck",
+  "Tryweryn",
+  "Twymyn",
+  "Tyne (Main)",
+  "Tyne (North)",
+  "Tyne (South)",
+  "Tywi / Towy",
+  "Ure",
+  "Usk",
+  "Vyrnwy",
+  "Walkham",
+  "Wansbeck",
+  "Wear",
+  "Wenning",
+  "Wharfe",
+  "Witham",
+  "Wnion",
+  "Wye",
+  "Yare",
+  "Yarty",
+  "Yealm",
+  "Yscir",
+  "Ysgethin Barmouth",
+  "Ystrad",
+  "Ystwyth",
+  "Don",
+  "Wandle",
+  "Menalhyl",
+  "Par",
+  "Strat and Neet",
+  "Valency",
+  "Wallington",
+  "Avon Water (Hants)",
+  "Blyth (North East)",
+  "Coron Lake (Anglesea)",
+  "Llynfi (Ogmore)",
+  "Rawthey",
+  "Stour (South West)",
+  "Wygyr (Anglesea)",
+  "Wyre (North West)",
+  "Wyre (Wales)"
+] %}
+
+{% set leg = '<h1 class="govuk-heading-l">Add a river where you fished in 2025</h1><p class="govuk-body-m">If you fished in more than one river, you can add another afterwards</p>' %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukFieldset({
+        legend: { html: leg },
+        isPageHeading: true
+      }) }}
+      <form action="summary-river.html">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="river-autocomplete">
+            Name of river
+          </label>
+          <div id="river-hint" class="govuk-hint">
+            For example, Derwent (Cumbria)
+          </div>
+
+          <input class="govuk-input govuk-!-width-one-half" list="river-list" id="river-autocomplete" name="river-autocomplete" aria-describedby="river-hint">
+          <datalist id="river-list">
+            {% for river in rivers %}
+              <option data-id="{{ loop.index }}" value="{{ river }}"></option>
+            {% endfor %}
+          </datalist>
+
+          <select class="govuk-select" id="river" name="river" hidden>
+            <option value=""></option>
+            {% for river in rivers %}
+              <option value="{{ loop.index }}">{{ river }}</option>
+            {% endfor %}
+          </select>
+
+          <script>
+            const input = document.getElementById('river-autocomplete');
+            const select = document.getElementById('river');
+            const options = select.options;
+          
+            input.addEventListener('change', () => {
+              const match = Array.from(options).find(opt => opt.text === input.value);
+              if (match) {
+                select.value = match.value;
+              } else {
+                select.value = '';
+              }
+            });
+          </script>
+        </div>
+
+        {{ govukInput({
+          label: {
+            text: "How many days did you fish in this river between 1 January and 16 June 2025"
+          },
+          hint: {
+            text: "Include days without a catch"
+          },
+          id: "days-fished",
+          name: "days-fished",
+          classes: "govuk-input--width-3"
+        }) }}
+
+        {{ govukInput({
+          id: "days-fished-other",
+          name: "days-fished-other",
+          label: {
+              text: "How many days did you fish in this river between 17 June and 31 December 2025?"
+          },
+          hint: { text: "Include days without a catch" },
+          classes: "govuk-input--width-3"
+        }) }}
+
+        {{ govukButton({
+          name: "continue",
+          text: "Continue" })
+        }}
+      </form>
+      <a class="govuk-body" href="summary-empty">Cancel and return to summary page</a>
+    </div>
+</div>
+
+{% endblock %}

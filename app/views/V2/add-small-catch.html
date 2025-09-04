@@ -1,0 +1,132 @@
+
+{% extends "layouts/main.html" %}
+
+{% set pageName="Add small catch" %}
+
+{% set leg = '<span class="govuk-heading-l">Add a small adult sea trout catch</span><p class="govuk-body-l">Add details of small adult sea trout (1lb and under) catches by month</p>' %}
+
+{% set rivers = [
+  "",
+  "Derwent",
+  "Aber"
+] %}
+
+{% set items = [] %}
+{% for river in rivers %}
+    {{ items.push({
+        text: river,
+        value: river
+    }) }}
+{% endfor %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukFieldset({
+        legend: { html: leg },
+         classes: "govuk-heading-l",
+        isPageHeading: true
+      }) }}
+      <form >
+        {{ govukSelect({
+          id: "river",
+          name: "river",
+          label: {
+              text: "River",
+              classes: "govuk-!-font-weight-bold"
+          },
+          fieldset: {
+              legend: {
+                  text: "River",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend govuk-!-font-weight-bold"
+              }
+          },
+          items: items
+        }) }}
+
+        {{ govukFieldset({
+          legend: {
+            html: '<span class="govuk-label govuk-!-font-weight-bold">Month caught</span><span id="fly-hint" class="govuk-hint">For example, 6</span>'
+          }
+        }) }}
+
+        {{ govukInput({
+          id: "month",
+          name: "month",
+          label: {
+              text: "Month",
+              classes: "govuk-date-input__label"
+          },
+          type: "text",
+          classes: "govuk-input--width-2"
+        }) }}
+
+        {{ govukInput({
+          id: "fly",
+          name: "fly",
+          hint: { text: "Number of fish caught with a fly" },
+          label: {
+              text: "Fly",
+              classes: "govuk-!-font-weight-bold"
+          },
+          attributes: { maxlength: 4 },
+          classes: "govuk-input--width-4"
+        }) }}
+
+        {{ govukInput({
+          id: "spinner",
+          name: "spinner",
+          hint: { text: "Number of fish caught with a spinner" },
+          label: {
+              text: "Spinner",
+              classes: "govuk-!-font-weight-bold"
+          },
+          attributes: { maxlength: 4 },
+          classes: "govuk-input--width-4"
+        }) }}
+
+     
+        {{ govukInput({
+            id: "bait",
+            name: "bait",
+            hint: { text: "Number of fish caught with bait" },
+            label: {
+                text: "Bait",
+                classes: "govuk-!-font-weight-bold"
+            },
+            attributes: { maxlength: 4 },
+            classes: "govuk-input--width-4"
+        }) }}
+
+        {{ govukInput({
+          id: "released",
+          name: "released",
+          hint: { text: "Number of fish released back into the water" },
+          label: {
+              text: "Released",
+              classes: "govuk-!-font-weight-bold"
+          },
+          attributes: { maxlength: 4 },
+          classes: "govuk-input--width-4 govuk-!-margin-bottom-6"
+        }) }}
+
+        {{ govukButton({
+          name: "continue",
+          text: "Save",
+          href: "summary-complete",
+          classes: "govuk-!-margin-right-1"
+        }) }}
+      
+        {{ govukButton({
+          name: "add",
+          text: "Save and add another",
+          href: "add-small-catch",
+          classes: "govuk-button--secondary"
+        }) }}
+      </form>
+      <a class="govuk-body" href="summary-river">Cancel</a>
+    </div>
+</div>
+
+{% endblock %}

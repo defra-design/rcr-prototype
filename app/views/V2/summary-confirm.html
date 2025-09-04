@@ -1,0 +1,39 @@
+{% extends "layouts/main.html" %} {% set pageName="Summary Empty" %} {% block
+    content %}
+    
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Confirm your {{data['select-year']}} catch return report</h1>
+        <div>
+          
+          <p class="govuk-body">
+            I confirm that I did not fish for salmon or sea trout in {{data['select-year']}}.
+          </p>
+
+          <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+              <span class="govuk-visually-hidden">Warning</span>
+              Only submit if you have finished fishing for salmon and sea trout this year. 
+            </strong>
+          </div>
+    
+          <a href="success-page" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Submit catch return
+          </a>
+    
+          <div>
+            <a id="cancel" class="govuk-link govuk-body-m" href="select-year.html"
+              >Cancel</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% endblock %}
+    Collapse
+    
+    
+    
+    

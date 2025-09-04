@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+{% set pageName="Select Year" %}
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/select-salmon-answer" method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+
+              Did you fish for salmon or sea trout in {{data['select-year']}}?
+
+            </h1>
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="salmon-sea-trout" name="salmon-sea-trout" type="radio" value="Yes"
+                {{ checked('salmon-sea-trout','Yes') }}>
+              <label class="govuk-label govuk-radios__label" for="salmon-sea-trout">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="salmon-sea-trout-2" name="salmon-sea-trout" type="radio" value="No"
+                {{ checked('salmon-sea-trout','No') }}>
+              <label class="govuk-label govuk-radios__label" for="salmon-sea-trout-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      {{ govukButton({
+          name: "continue",
+          text: "Continue" })
+      }}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
